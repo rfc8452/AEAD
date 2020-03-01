@@ -4,7 +4,7 @@
 
     <groupId>org.rfc8452.aead</groupId>
     <artifactId>AEAD</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.11</version>
 
     <name>AEAD</name>
     <description>AES-GCM-SIV AEAD Implementation - Nonce Misuse-Resistant Authenticated Encryption
@@ -159,7 +159,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Automatic-Module-Name>com.rfc8452.authenticator</Automatic-Module-Name>
+                            <Automatic-Module-Name>com.rfc8452.aead</Automatic-Module-Name>
                         </manifestEntries>
                     </archive>
                 </configuration>
