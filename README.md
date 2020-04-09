@@ -15,4 +15,4 @@ From RFC8452:
     this class of AEADs, encrypting two messages with the same nonce only
     discloses whether the messages were equal or not.
 
-See [RFC8432](https://tools.ietf.org/html/rfc8452) for more details.
+See [RFC8452](https://tools.ietf.org/html/rfc8452) for more details.
