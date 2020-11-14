@@ -4,3 +4,4 @@ META-INF/
 target/
 settings.xml
 release.properties
+.DS_Store
