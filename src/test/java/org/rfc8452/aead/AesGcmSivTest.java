@@ -1,5 +1,6 @@
 package org.rfc8452.aead;
 
+import javax.crypto.AEADBadTagException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -59,8 +60,7 @@ class AesGcmSivTest
         final byte[] plaintext = new byte[] {1, 1};
         final byte[] aad = new byte[] {2, 2};
         final byte[] invalidAad = new byte[] {3, 3};
-        final byte[] deciphered = aead.open(aead.seal(plaintext, aad), invalidAad);
-        Assertions.assertNull(deciphered);
+        Assertions.assertThrows(AEADBadTagException.class, () -> aead.open(aead.seal(plaintext, aad), invalidAad));
     }
 
     @Test
@@ -70,8 +70,7 @@ class AesGcmSivTest
         final byte[] aad = new byte[] {2, 2};
         final byte[] ciphertext = aead.seal(plaintext, aad);
         aead.resetKey();
-        final byte[] deciphered = aead.open(ciphertext, aad);
-        Assertions.assertNull(deciphered);
+        Assertions.assertThrows(AEADBadTagException.class, () -> aead.open(ciphertext, aad));
     }
 
 }
