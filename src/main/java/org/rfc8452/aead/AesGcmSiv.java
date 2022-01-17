@@ -2,6 +2,7 @@ package org.rfc8452.aead;
 
 import org.rfc8452.authenticator.Polyval;
 
+import javax.crypto.AEADBadTagException;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.GeneralSecurityException;
@@ -92,7 +93,8 @@ public class AesGcmSiv implements AEAD
         {
             return deciphered;
         }
-        return null;
+
+        throw new AEADBadTagException();
     }
 
     @Override
@@ -100,7 +102,7 @@ public class AesGcmSiv implements AEAD
     {
         if (nonceWithCiphertext.length < NONCE_BYTE_LENGTH)
         {
-            return null;
+            throw new GeneralSecurityException("Ciphertext is too short");
         }
         final byte[] nonce = new byte[NONCE_BYTE_LENGTH];
         final byte[] ciphertext = new byte[nonceWithCiphertext.length - NONCE_BYTE_LENGTH];
@@ -118,10 +120,6 @@ public class AesGcmSiv implements AEAD
         final byte[] aad = Conversion.hexStringToBytes(aadHexString);
         final byte[] nonce = Conversion.hexStringToBytes(nonceHexString);
         final byte[] plaintext = open(ciphertext, aad, nonce);
-        if (null == plaintext)
-        {
-            return null;
-        }
         return Conversion.bytesToHexString(plaintext);
     }
 
