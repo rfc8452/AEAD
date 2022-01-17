@@ -6,6 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -87,7 +88,7 @@ public class AesGcmSiv implements AEAD
         final byte[] deciphered = aesCtr(encryptionKey, tag, plainText);
         final byte[] actual = getTag(encryptionKey, authenticationKey, deciphered, aad, nonce);
 
-        if (Arrays.equals(tag, actual))
+        if (MessageDigest.isEqual(tag, actual))
         {
             return deciphered;
         }
